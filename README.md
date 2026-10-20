@@ -4,13 +4,13 @@ Projet Maven `microservice-product`, Java 11+, Spring 5.3.20 et Hibernate 5.6.9.
 
 ## Préparer MySQL
 
-Créer la base avec `CREATE DATABASE product_db;`. Adapter JDBC_URL, JDBC_USERNAME et JDBC_PASSWORD dans l'environnement. Aucun mot de passe personnel n'est stocké dans le dépôt.
+Créer la base avec `CREATE DATABASE product_db;`. La configuration locale utilise l'utilisateur root avec un mot de passe vide (`jdbc.password=`).
 
 ```powershell
 $env:JAVA_HOME="C:\Users\rayan\.jdks\ms-21.0.9"
 $env:Path="$env:JAVA_HOME\bin;$env:Path"
 $env:JDBC_USERNAME="root"
-$env:JDBC_PASSWORD="votre-mot-de-passe"
+Remove-Item Env:JDBC_PASSWORD -ErrorAction SilentlyContinue
 mvn clean verify
 mvn exec:java -Dexec.mainClass="com.microservice.product.TestHibernate"
 mvn exec:java -Dexec.mainClass="com.microservice.product.MainApp"
